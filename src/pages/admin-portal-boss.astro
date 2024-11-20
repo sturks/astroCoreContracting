@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PortfolioManager from '../components/PortfolioManager.vue';
+import { isAuthenticated } from '../lib/auth';
+
+const authenticated = await isAuthenticated(Astro.request);
+
+if (!authenticated) {
+  return Astro.redirect('/admin-login');
+}
+---
+
+<Layout title="Portfolio Management">
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-display text-center mb-12">Portfolio Management</h1>
+    <PortfolioManager client:load />
+  </div>
+</Layout>

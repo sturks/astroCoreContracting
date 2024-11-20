@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    title: 'Custom Carpentry',
+    description: 'Expert craftsmanship for custom woodworking projects, including built-ins, custom cabinets, and architectural details.',
+    icon: '🔨',
+    features: ['Custom Built-ins', 'Cabinets & Shelving', 'Trim & Molding', 'Custom Furniture']
+  },
+  {
+    title: 'Home Renovations',
+    description: 'Complete home transformation services, from kitchen and bathroom remodels to full house renovations.',
+    icon: '🏠',
+    features: ['Kitchen Remodels', 'Bathroom Updates', 'Basement Finishing', 'Room Additions']
+  },
+  {
+    title: 'Commercial Projects',
+    description: 'Professional contracting services for commercial spaces, ensuring quality and timely completion.',
+    icon: '🏢',
+    features: ['Office Renovations', 'Retail Buildouts', 'Restaurant Fixtures', 'Commercial Repairs']
+  },
+  {
+    title: 'Outdoor Living',
+    description: 'Create your perfect outdoor space with custom decks, pergolas, and outdoor kitchens.',
+    icon: '🌳',
+    features: ['Custom Decks', 'Pergolas', 'Outdoor Kitchens', 'Fencing']
+  }
+];
+---
+
+<Layout title="Services - Core Contracting">
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-display text-center mb-4">Our Services</h1>
+    <p class="text-center text-lg mb-12 max-w-2xl mx-auto">
+      Professional carpentry and contracting services tailored to your needs
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {services.map(service => (
+        <div class="bg-white dark:bg-primary-800 p-6 rounded-lg shadow-lg">
+          <div class="text-4xl mb-4">{service.icon}</div>
+          <h2 class="text-2xl font-bold mb-2">{service.title}</h2>
+          <p class="text-primary-600 dark:text-primary-300 mb-4">{service.description}</p>
+          <ul class="space-y-2">
+            {service.features.map(feature => (
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-wood-dark dark:text-wood-light mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center">
+      <a
+        href="/contact"
+        class="inline-block bg-wood-dark hover:bg-wood text-white px-8 py-3 rounded-lg transition-colors"
+      >
+        Get a Free Quote
+      </a>
+    </div>
+  </div>
+</Layout>

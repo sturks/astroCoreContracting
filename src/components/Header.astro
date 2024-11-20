@@ -1,0 +1,72 @@
+---
+const navItems = [
+  { href: '/', text: 'Home' },
+  { href: '/services', text: 'Services' },
+  { href: '/portfolio', text: 'Portfolio' },
+  { href: '/about', text: 'About' },
+  { href: '/blog', text: 'Blog' },
+  { href: '/contact', text: 'Contact' },
+];
+---
+
+<header class="bg-white dark:bg-primary-800 shadow-md">
+  <nav class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <a href="/" class="text-2xl font-display text-wood-dark dark:text-wood-light">
+        Core Contracting
+      </a>
+      
+      <div class="hidden md:flex items-center space-x-6">
+        {navItems.map(item => (
+          <a 
+            href={item.href}
+            class="text-primary-600 dark:text-primary-300 hover:text-wood-dark dark:hover:text-wood-light transition-colors"
+          >
+            {item.text}
+          </a>
+        ))}
+        <button
+          id="theme-toggle"
+          class="p-2 rounded-full hover:bg-primary-100 dark:hover:bg-primary-700 transition-colors"
+          aria-label="Toggle theme"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      </div>
+
+      <button
+        id="mobile-menu-button"
+        class="md:hidden p-2 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-700"
+        aria-label="Toggle menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
+      {navItems.map(item => (
+        <a 
+          href={item.href}
+          class="block py-2 text-primary-600 dark:text-primary-300 hover:text-wood-dark dark:hover:text-wood-light transition-colors"
+        >
+          {item.text}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
+  });
+</script>

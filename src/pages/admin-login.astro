@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Admin Login - Core Contracting">
+  <div class="min-h-[70vh] flex items-center justify-center">
+    <div class="bg-white dark:bg-primary-800 p-8 rounded-lg shadow-lg max-w-md w-full">
+      <h1 class="text-3xl font-display text-center mb-8">Admin Login</h1>
+      
+      <form id="login-form" class="space-y-6">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="password">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            required
+            class="w-full px-4 py-2 rounded-lg border border-primary-300 dark:border-primary-600 focus:ring-2 focus:ring-wood-light dark:bg-primary-700"
+          />
+        </div>
+        
+        <button
+          type="submit"
+          class="w-full bg-wood-dark hover:bg-wood text-white px-6 py-3 rounded-lg transition-colors"
+        >
+          Login
+        </button>
+      </form>
+      
+      <div id="error-message" class="mt-4 text-red-500 text-center hidden"></div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+document.addEventListener('astro:page-load', () => {
+  const form = document.getElementById('login-form');
+  const errorMessage = document.getElementById('error-message');
+  
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ password })
+      });
+      
+      if (response.ok) {
+        const { token } = await response.json();
+        localStorage.setItem('auth_token', token);
+        window.location.href = '/admin-portal-boss';
+      } else {
+        throw new Error('Invalid password');
+      }
+    } catch (error) {
+      if (errorMessage) {
+        errorMessage.textContent = 'Invalid password';
+        errorMessage.classList.remove('hidden');
+      }
+    }
+  });
+});
+</script>

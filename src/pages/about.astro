@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const team = [
+  {
+    name: 'Mitch McQuoid',
+    role: 'Owner & Master Carpenter',
+    bio: 'With over a decade of experience in custom carpentry and contracting, Mitch leads Core Contracting with expertise and dedication to quality craftsmanship.'
+  }
+];
+
+const values = [
+  {
+    title: 'Quality Craftsmanship',
+    description: 'We take pride in delivering exceptional work that stands the test of time.'
+  },
+  {
+    title: 'Customer Satisfaction',
+    description: 'Your vision and satisfaction are our top priorities throughout every project.'
+  },
+  {
+    title: 'Professional Service',
+    description: 'We maintain clear communication and reliability from start to finish.'
+  },
+  {
+    title: 'Local Expertise',
+    description: 'Deep understanding of North Bay building requirements and community needs.'
+  }
+];
+---
+
+<Layout title="About Us - Core Contracting">
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-serif font-bold text-center mb-4">About Core Contracting</h1>
+    <p class="text-center text-lg mb-12 max-w-2xl mx-auto">
+      Building excellence in North Bay through quality craftsmanship and dedication
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+      <div>
+        <h2 class="text-3xl font-bold mb-4">Our Story</h2>
+        <p class="text-primary-600 dark:text-primary-300 mb-4">
+          Founded in North Bay, Core Contracting has established itself as a trusted name in custom carpentry and contracting services. Our journey began with a simple mission: to deliver exceptional craftsmanship while building lasting relationships with our clients.
+        </p>
+        <p class="text-primary-600 dark:text-primary-300">
+          Today, we continue to serve the North Bay community with the same dedication to quality and customer satisfaction that has been our hallmark since day one.
+        </p>
+      </div>
+      <div class="bg-white dark:bg-primary-800 p-6 rounded-lg shadow-lg">
+        <h2 class="text-3xl font-bold mb-4">Our Values</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {values.map(value => (
+            <div>
+              <h3 class="text-xl font-bold mb-2">{value.title}</h3>
+              <p class="text-primary-600 dark:text-primary-300">{value.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-primary-100 dark:bg-primary-800 rounded-lg p-8 mb-16">
+      <h2 class="text-3xl font-bold text-center mb-8">Our Team</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {team.map(member => (
+          <div class="text-center">
+            <div class="w-32 h-32 bg-primary-200 dark:bg-primary-700 rounded-full mx-auto mb-4"></div>
+            <h3 class="text-xl font-bold mb-2">{member.name}</h3>
+            <p class="text-primary-600 dark:text-primary-300 mb-2">{member.role}</p>
+            <p class="text-sm">{member.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a
+        href="/contact"
+        class="inline-block bg-wood-dark hover:bg-wood text-white px-8 py-3 rounded-lg transition-colors"
+      >
+        Work With Us
+      </a>
+    </div>
+  </div>
+</Layout>

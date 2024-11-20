@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    title: 'Custom Carpentry',
+    description: 'Bespoke woodworking solutions tailored to your needs.',
+    icon: '🔨'
+  },
+  {
+    title: 'Renovations',
+    description: 'Complete home transformations and updates.',
+    icon: '🏠'
+  },
+  {
+    title: 'General Contracting',
+    description: 'Full-service project management and execution.',
+    icon: '📋'
+  }
+];
+---
+
+<Layout title="Core Contracting - Professional Carpentry Services in North Bay">
+  <section class="relative h-[80vh] flex items-center justify-center text-white">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <div class="relative z-20 text-center px-4">
+      <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4">
+        Crafting Excellence in Every Project
+      </h1>
+      <p class="text-xl md:text-2xl mb-8">
+        Professional carpentry and contracting services in North Bay, Ontario
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contact"
+          class="bg-wood-dark hover:bg-wood text-white px-8 py-3 rounded-lg transition-colors"
+        >
+          Get a Quote
+        </a>
+        <a
+          href="/portfolio"
+          class="bg-transparent border-2 border-white hover:bg-white/10 px-8 py-3 rounded-lg transition-colors"
+        >
+          View Our Work
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12">Our Services</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {services.map(service => (
+          <div class="bg-white dark:bg-primary-800 p-6 rounded-lg shadow-lg">
+            <div class="text-4xl mb-4">{service.icon}</div>
+            <h3 class="text-xl font-bold mb-2">{service.title}</h3>
+            <p class="text-primary-600 dark:text-primary-300">{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-primary-100 dark:bg-primary-800">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12">Why Choose Us</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Expert Craftsmanship</h3>
+          <p class="text-primary-600 dark:text-primary-300 mb-4">
+            With years of experience in the industry, we bring skill and precision to every project.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-center">
+              <svg class="h-5 w-5 text-wood-dark dark:text-wood-light mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+              </svg>
+              Quality Materials
+            </li>
+            <li class="flex items-center">
+              <svg class="h-5 w-5 text-wood-dark dark:text-wood-light mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+              </svg>
+              Attention to Detail
+            </li>
+            <li class="flex items-center">
+              <svg class="h-5 w-5 text-wood-dark dark:text-wood-light mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+              </svg>
+              On-Time Completion
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-primary-700 p-6 rounded-lg">
+          <h3 class="text-2xl font-bold mb-4">Get Started Today</h3>
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1" for="email">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                class="w-full px-3 py-2 border border-primary-300 dark:border-primary-600 rounded-lg focus:ring-2 focus:ring-wood-light dark:bg-primary-800"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-wood-dark hover:bg-wood text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              Subscribe to Updates
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

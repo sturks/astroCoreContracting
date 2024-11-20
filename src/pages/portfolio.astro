@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getProjects } from '../lib/portfolio';
+
+const projects = await getProjects();
+---
+
+<Layout title="Portfolio - Core Contracting">
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-serif font-bold text-center mb-12">Our Portfolio</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        <div class="bg-white dark:bg-primary-800 rounded-lg shadow-lg overflow-hidden">
+          <img
+            src={project.images[0]}
+            alt={project.title}
+            class="w-full h-64 object-cover"
+          />
+          <div class="p-6">
+            <h2 class="text-2xl font-bold mb-2">{project.title}</h2>
+            <p class="text-primary-600 dark:text-primary-300 mb-4">
+              {project.description}
+            </p>
+            <button
+              class="view-project bg-wood-dark hover:bg-wood text-white px-4 py-2 rounded-lg transition-colors"
+              data-project={JSON.stringify(project)}
+            >
+              View Project
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Project Modal -->
+  <div id="project-modal" class="fixed inset-0 bg-black/50 hidden z-50">
+    <div class="container mx-auto px-4 h-full flex items-center justify-center">
+      <div class="bg-white dark:bg-primary-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 id="modal-title" class="text-2xl font-bold"></h3>
+            <button id="close-modal" class="text-2xl">&times;</button>
+          </div>
+          <div id="modal-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const modal = document.getElementById('project-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContent = document.getElementById('modal-content');
+    const closeModal = document.getElementById('close-modal');
+    
+    document.querySelectorAll('.view-project').forEach(button => {
+      button.addEventListener('click', () => {
+        const project = JSON.parse(button.dataset.project);
+        modalTitle.textContent = project.title;
+        
+        modalContent.innerHTML = `
+          <div class="space-y-4">
+            <p class="text-primary-600 dark:text-primary-300">${project.description}</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${project.images.map(image => `
+                <img src="${image}" alt="" class="w-full h-64 object-cover rounded-lg">
+              `).join('')}
+            </div>
+          </div>
+        `;
+        
+        modal.classList.remove('hidden');
+      });
+    });
+    
+    closeModal?.addEventListener('click', () => {
+      modal?.classList.add('hidden');
+    });
+    
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  });
+</script>
